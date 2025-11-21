@@ -2,168 +2,170 @@
 <html lang="pt-BR" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>NexusForge AI</title>
+
+    <!-- Tailwind (via CDN é permitido no desenvolvimento) -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Highlight.js Theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Highlight.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    
+
+    <!-- Estilos -->
     <style>
-        @font-face {
-            font-family: 'SF Pro Display';
-            font-weight: 400;
-            src: local('SF Pro Display Regular'), local('SFProDisplay-Regular');
-        }
-        @font-face {
-            font-family: 'SF Pro Display';
-            font-weight: 500;
-            src: local('SF Pro Display Medium'), local('SFProDisplay-Medium');
-        }
-        @font-face {
-            font-family: 'SF Pro Display';
-            font-weight: 600;
-            src: local('SF Pro Display Semibold'), local('SFProDisplay-Semibold');
-        }
+      @font-face {
+        font-family: "SF Pro Display";
+        font-weight: 400;
+        src: local("SF Pro Display Regular"), local("SFProDisplay-Regular");
+      }
+      @font-face {
+        font-family: "SF Pro Display";
+        font-weight: 500;
+        src: local("SF Pro Display Medium"), local("SFProDisplay-Medium");
+      }
+      @font-face {
+        font-family: "SF Pro Display";
+        font-weight: 600;
+        src: local("SF Pro Display Semibold"), local("SFProDisplay-Semibold");
+      }
 
-        /* Global Resets for Content */
-        html, body {
-            overflow-x: hidden;
-            max-width: 100vw;
-        }
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
 
-        img, video {
-            max-width: 100%;
-            height: auto;
-        }
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+      }
 
-        /* Code Block Overrides */
-        .code-block-container {
-            display: block;   
-            width: 100%;     
-            max-width: 100%;   
-            box-sizing: border-box;
-            margin: 1rem 0;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
+      .code-block-container {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
 
-        .code-header {
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           padding: 0.5rem 1rem;
-           background-color: #2d2d2d;
-           font-family: monospace;
-           font-size: 0.75rem;
-           color: #9ca3af;
-        }
-        
-        .code-content {
-            padding: 1rem;
-            background-color: #1e1e1e;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        }
+      .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background-color: #2d2d2d;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #9ca3af;
+      }
 
-        /* Force word break on prose to prevent overflow */
-        .prose {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .prose pre {
-            overflow-x: auto;
-            white-space: pre;
-            max-width: 100%;
-        }
+      .code-content {
+        padding: 1rem;
+        background-color: #1e1e1e;
+        overflow-x: auto;
+      }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+      .prose {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
 
-        /* Animation Utilities */
-        .pulsating {
-            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-        }
+      .prose pre {
+        overflow-x: auto;
+        white-space: pre;
+        max-width: 100%;
+      }
 
-        /* Message Block Animation (Reverted to simple block entry) */
-        .message-enter {
-            opacity: 0;
-            transform: translateY(10px);
-            animation: showMsg 0.4s ease forwards;
-        }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
 
-        @keyframes showMsg {
-            from { 
-                opacity: 0; 
-                transform: translateY(10px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+      .message-enter {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: showMsg 0.4s ease forwards;
+      }
+
+      @keyframes showMsg {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
 
+    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
-        darkMode: 'class',
+        darkMode: "class",
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['SF Pro Display', 'Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
+              sans: ["Inter", "sans-serif"],
+              display: ["SF Pro Display", "Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
             },
             colors: {
-              'silver-real': '#E3E3E3',
+              "silver-real": "#E3E3E3",
               gray: {
-                750: '#2d2d2d',
-                850: '#1a1a1a',
-                950: '#0a0a0a',
-              }
+                750: "#2d2d2d",
+                850: "#1a1a1a",
+                950: "#0a0a0a",
+              },
             },
             typography: (theme) => ({
               DEFAULT: {
                 css: {
-                  color: theme('colors.gray.300'),
-                  maxWidth: '100%',
-                  h1: { color: theme('colors.white'), fontFamily: 'SF Pro Display' },
-                  h2: { color: theme('colors.white'), fontFamily: 'SF Pro Display' },
-                  h3: { color: theme('colors.gray.200') },
-                  strong: { color: theme('colors.white') },
-                  code: { color: theme('colors.gray.200') },
-                  'ul > li::marker': { color: theme('colors.gray.500') },
+                  color: theme("colors.gray.300"),
+                  maxWidth: "100%",
+                  h1: {
+                    color: theme("colors.white"),
+                    fontFamily: "SF Pro Display",
+                  },
+                  h2: {
+                    color: theme("colors.white"),
+                    fontFamily: "SF Pro Display",
+                  },
+                  h3: { color: theme("colors.gray.200") },
+                  strong: { color: theme("colors.white") },
+                  code: { color: theme("colors.gray.200") },
                 },
               },
             }),
@@ -171,21 +173,12 @@
         },
       };
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
+
   <body class="bg-black text-white h-dvh flex flex-col overflow-hidden">
     <div id="root" class="h-full w-full"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+
+    <!-- CORREÇÃO VITE: deve apontar para ./src/index.tsx -->
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
 </html>
